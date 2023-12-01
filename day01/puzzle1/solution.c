@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
         c = fgetc(fd);
     }
 
-    fprintf(stdout, "Calibration: %d", calibrationSum);
+    fprintf(stdout, "Calibration: %d\n", calibrationSum);
 
     return OK;
 }
