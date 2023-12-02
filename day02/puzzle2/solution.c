@@ -4,10 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int maxRedCubes = 12;
-int maxGreenCubes = 13;
-int maxBlueCubes = 14;
-
 int isDigit(char c) {
     if (c >= '0' && c <= '9') return 1;
     return 0;
@@ -27,44 +23,47 @@ int main(int argc, char **argv) {
         return OK;
     }
 
-    int gamesSum = 0;
+    int powersSum = 0;
 
     while (!feof(fd)) {
         char lineArr[MAX];
         char *line = lineArr;
         
         if (fgets(lineArr, MAX, fd) != NULL) {
-            int gameIsPossible = 1;
 
             while (!isDigit(*line)) line++;
-            int gameNumber = strtol(line, &line, 10);
+
+            int necessaryRed = 0;
+            int necessaryGreen = 0;
+            int necessaryBlue = 0;
 
             while (!isDigit(*line)) line++;
-            while (*line != '\0' && gameIsPossible) {
+            while (*line != '\0') {
             
                 int colorAmount = strtol(line, &line, 10);
                 while (*line == ' ') line++;
                 
                 switch (*line) {
                 case 'r':
-                    if (colorAmount > maxRedCubes) gameIsPossible = 0;
+                    if (colorAmount > necessaryRed) necessaryRed = colorAmount;
                     break;
                 case 'g':
-                    if (colorAmount > maxGreenCubes) gameIsPossible = 0;
+                    if (colorAmount > necessaryGreen) necessaryGreen = colorAmount;
                     break;
                 case 'b':
-                    if (colorAmount > maxBlueCubes) gameIsPossible = 0;
+                    if (colorAmount > necessaryBlue) necessaryBlue = colorAmount;
                     break;      
                 }
 
                 while (!isDigit(*line) && *line != '\0') line++;
             }
 
-            if (gameIsPossible) gamesSum += gameNumber;
+            int power = necessaryRed * necessaryGreen * necessaryBlue;
+            powersSum += power;
         }
     }
 
-    fprintf(stdout, "Sum: %d\n", gamesSum);
+    fprintf(stdout, "Power: %d\n", powersSum);
 
     return OK;
 }
