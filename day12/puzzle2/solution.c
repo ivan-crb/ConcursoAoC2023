@@ -189,7 +189,7 @@ int main(int argc, char **argv) {
     }
     
     fprintf(stdout, "--------------------------------------------------\n");
-    fprintf(stdout, "\tSum of shortest paths: %lld\n", arrangementSum);
+    fprintf(stdout, "\tSum of possible arrangements: %lld\n", arrangementSum);
     fprintf(stdout, "\tTime: %f ms\n", ((double) clock() - startingTime) / CLOCKS_PER_SEC);
     fprintf(stdout, "--------------------------------------------------\n");
 
